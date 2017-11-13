@@ -12,10 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     checkTimer = new QTimer;
     checkTimer->start(100);
-    ui->label_27->setText(QString::fromLocal8Bit("<FONT COLOR=red>Нет файла</FONT>"));
-    ui->label_28->setText(QString::fromLocal8Bit("<FONT COLOR=red>Нет файла</FONT>"));
-    ui->label_23->setText(QString::fromLocal8Bit("<FONT COLOR=red>Список пуст</FONT>"));
-    ui->label_24->setText(QString::fromLocal8Bit("<FONT COLOR=red>Список пуст</FONT>"));
+    ui->label_27->setText(QString::fromLocal8Bit("<FONT COLOR=red>No file</FONT>"));
+    ui->label_28->setText(QString::fromLocal8Bit("<FONT COLOR=red>No file</FONT>"));
+    ui->label_23->setText(QString::fromLocal8Bit("<FONT COLOR=red>List is empty</FONT>"));
+    ui->label_24->setText(QString::fromLocal8Bit("<FONT COLOR=red>List is empty</FONT>"));
     ui->spinBox->setMinimum(0);
     ui->spinBox->setMaximum(1000);
     ui->spinBox_4->setMinimum(0);
@@ -60,7 +60,7 @@ void MainWindow::uploadFile()
 
 void MainWindow::clearF()
 {
-    ui->label_27->setText(QString::fromLocal8Bit("<FONT COLOR=red>Нет файла</FONT>"));
+    ui->label_27->setText(QString::fromLocal8Bit("<FONT COLOR=red>No file</FONT>"));
     ui->pushButton_2->setVisible(false);
 }
 
@@ -105,7 +105,7 @@ void MainWindow::changeRandomPost()
 
 void MainWindow::addNote()
 {
-    if(ui->label_27->text() != "Нет файла")
+    if(ui->label_27->text() != "No file")
         journal.readFromF(ui->label_27->text());
     if(!(ui->lineEdit_1->text()==""||
         ui->lineEdit_2->text()==""||
@@ -149,13 +149,13 @@ void MainWindow::addNote()
         if(journal.getIsCorrect())
         {
             //Qdialog
-            QString str = "Объём кофе был равен " + QString::number(testNote.getCountOfCoffee());
+            QString str = "Volume of coffee was " + QString::number(testNote.getCountOfCoffee());
             dialog = new Dialog(ui->dateTimeEdit_2->dateTime(), str);
             dialog->show();
         }
         else
         {
-            QString str = "Объём кофе не был равен " + QString::number(testNote.getCountOfCoffee());
+            QString str = "Volume of coffee was not " + QString::number(testNote.getCountOfCoffee());
             dialog = new Dialog(ui->dateTimeEdit_2->dateTime(), str);
             dialog->show();
         }
@@ -168,8 +168,8 @@ void MainWindow::addNote()
     ui->spinBox_2->setMaximum(journal.size());
     ui->spinBox_3->setMinimum(1);
     ui->spinBox_3->setMaximum(journal.size());
-    ui->label_23->setText(QString::fromLocal8Bit("<FONT COLOR=green>Список не пуст</FONT>"));
-    ui->label_24->setText(QString::fromLocal8Bit("<FONT COLOR=green>Список не пуст</FONT>"));
+    ui->label_23->setText(QString::fromLocal8Bit("<FONT COLOR=green>List is not empty</FONT>"));
+    ui->label_24->setText(QString::fromLocal8Bit("<FONT COLOR=green>List is not empty</FONT>"));
     ui->label_26->setText(QString::number(journal.getCoffeeVolume()));
     showJournal();
 }
@@ -227,15 +227,15 @@ void MainWindow::showJournal()
     ui->tableWidget->clear();
     ui->tableWidget->setRowCount(journal.size());
     ui->tableWidget->setColumnCount(9);
-    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem(QString::fromLocal8Bit("Дата")));
-    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem(QString::fromLocal8Bit("Время")));
-    ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem(QString::fromLocal8Bit("Имя")));
-    ui->tableWidget->setHorizontalHeaderItem(3, new QTableWidgetItem(QString::fromLocal8Bit("Фамилия")));
-    ui->tableWidget->setHorizontalHeaderItem(4, new QTableWidgetItem(QString::fromLocal8Bit("Отчество")));
-    ui->tableWidget->setHorizontalHeaderItem(5, new QTableWidgetItem(QString::fromLocal8Bit("Должность")));
-    ui->tableWidget->setHorizontalHeaderItem(6, new QTableWidgetItem(QString::fromLocal8Bit("Учёная степень")));
-    ui->tableWidget->setHorizontalHeaderItem(7, new QTableWidgetItem(QString::fromLocal8Bit("Влияние на кофе")));
-    ui->tableWidget->setHorizontalHeaderItem(8, new QTableWidgetItem(QString::fromLocal8Bit("Текущий объём кофе")));
+    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem(QString::fromLocal8Bit("Date")));
+    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem(QString::fromLocal8Bit("Time")));
+    ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem(QString::fromLocal8Bit("Name")));
+    ui->tableWidget->setHorizontalHeaderItem(3, new QTableWidgetItem(QString::fromLocal8Bit("Surname")));
+    ui->tableWidget->setHorizontalHeaderItem(4, new QTableWidgetItem(QString::fromLocal8Bit("Fathername")));
+    ui->tableWidget->setHorizontalHeaderItem(5, new QTableWidgetItem(QString::fromLocal8Bit("Position")));
+    ui->tableWidget->setHorizontalHeaderItem(6, new QTableWidgetItem(QString::fromLocal8Bit("Degree")));
+    ui->tableWidget->setHorizontalHeaderItem(7, new QTableWidgetItem(QString::fromLocal8Bit("Volume on coffe")));
+    ui->tableWidget->setHorizontalHeaderItem(8, new QTableWidgetItem(QString::fromLocal8Bit("Current volume of coffee")));
     for(int i = 0; i < showmentNumber; i++)
     {
         if(journal.mass[i]->getType())
@@ -287,7 +287,7 @@ void MainWindow::readFromF()
 
 void MainWindow::writeToF()
 {
-    if(ui->label_28->text() != "Нет файла")
+    if(ui->label_28->text() != "No file")
         journal.writeToF(ui->label_28->text());
 }
 
@@ -431,7 +431,7 @@ void MainWindow::checkButtons()
         ui->spinBox_3->setVisible(false);
     else
         ui->spinBox_3->setVisible(true);
-    if(ui->label_27->text() == "Нет файла")
+    if(ui->label_27->text() == "No file")
         ui->pushButton_2->setDisabled(true);
     else
         ui->pushButton_2->setDisabled(false);
@@ -440,7 +440,7 @@ void MainWindow::checkButtons()
             ui->lineEdit_2->text()==""||
             ui->lineEdit_3->text()==""||
             ui->lineEdit_4->text()==""||
-            ui->lineEdit_5->text()=="") && (ui->label_27->text() == "Нет файла")) ||
+            ui->lineEdit_5->text()=="") && (ui->label_27->text() == "No file")) ||
             !(ui->toolBox->widget(1)->isVisible() ||
              ui->toolBox->widget(0)->isVisible())
             )
@@ -468,11 +468,11 @@ void MainWindow::checkButtons()
     {
         ui->pushButton_3->setDisabled(true);
         ui->pushButton_4->setDisabled(true);
-        ui->label_23->setText(QString::fromLocal8Bit("<FONT COLOR=red>Список пуст</FONT>"));
-        ui->label_24->setText(QString::fromLocal8Bit("<FONT COLOR=red>Список пуст</FONT>"));
+        ui->label_23->setText(QString::fromLocal8Bit("<FONT COLOR=red>List is empty</FONT>"));
+        ui->label_24->setText(QString::fromLocal8Bit("<FONT COLOR=red>List is empty</FONT>"));
         ui->tabWidget->widget(1)->setDisabled(true);
     }
-    if(ui->label_28->text() == "Нет файла")
+    if(ui->label_28->text() == "No file")
         ui->pushButton_6->setDisabled(true);
     else
         ui->pushButton_6->setDisabled(false);
